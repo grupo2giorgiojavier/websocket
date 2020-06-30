@@ -1,7 +1,7 @@
 import socket
 import getmac
 HEADER=64
-PORT=22
+PORT=3074
 SERVER='192.168.1.85'
 ADDR=(SERVER,PORT)
 FORMAT='utf-8'
