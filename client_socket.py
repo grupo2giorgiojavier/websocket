@@ -1,12 +1,24 @@
 import socket
+import getmac
 HEADER=64
 PORT=80
 SERVER='158.251.91.68'
 ADDR=(SERVER,PORT)
 FORMAT='utf-8'
 DISCONNECT_MESSAGE="DISCONNECT!"
+MAC_CORRECT='CORRECT MAC ADDRESS'
+AUTHORIZED_MAC='08:00:27:89:ad:9f'
 client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 client.connect(ADDR)
+
+def handshake():
+    msg=getmac.get_mac_address()
+    msg_rcv=send(msg)
+    if msg_rcv==MAC_CORRECT:
+        return True
+    else:
+        return False
+
 def send(msg):
     message=msg.encode(FORMAT)
     msg_length=len(message)
@@ -14,10 +26,10 @@ def send(msg):
     send_length+=b' '*(HEADER-len(send_length))
     client.send(send_length)
     client.send(message)
-    print(client.recv(2048).decode(FORMAT))
+    return client.recv(2048).decode(FORMAT)
 
-send("Hola EIE")
-input()
-send("ASDFADSDF")
-input()
-send(DISCONNECT_MESSAGE)
+handshake_confirm=handshake()
+if handshake_confirm:
+    msg=input("Escriba su mensaje:")
+    send(msg)
+    
