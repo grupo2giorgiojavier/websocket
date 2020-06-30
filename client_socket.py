@@ -30,6 +30,7 @@ def send(msg):
 
 handshake_confirm=handshake()
 if handshake_confirm:
-    msg=input("Escriba su mensaje:")
-    send(msg)
+    send("Hola EIE")
+    input("Mensaje enviado HOLA EIE revise el servidor")
+    
     
