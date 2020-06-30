@@ -1,7 +1,7 @@
 import socket
 import threading
 HEADER=64
-PORT=''
+PORT=80
 SERVER='158.251.91.68'
 ADDR=(SERVER,PORT)
 FORMAT='utf-8'
